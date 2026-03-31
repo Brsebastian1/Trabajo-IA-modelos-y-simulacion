@@ -1,0 +1,24 @@
+Tienes un DataFrame con variables numéricas y una variable objetivo continua. Sospechas que el modelo puede estar sobreajustando debido a la complejidad del conjunto de datos, por lo que quieres aplicar regularización automáticamente y evaluar su impacto.
+
+Tu Misión:
+Escribe una función llamada evaluar_regularizacion_ridge(df, target_col, alphas) que realice lo siguiente:
+    • Separe las características X de la variable objetivo y usando target_col. 
+    • Seleccione únicamente las columnas numéricas de X. 
+    • Impute los valores faltantes usando la media con SimpleImputer de sklearn. 
+    • Escale las variables usando StandardScaler. 
+    • Para cada valor de alpha en la lista alphas: 
+        ◦ Entrene un modelo Ridge de sklearn.linear_model. 
+        ◦ Evalúe el modelo usando validación cruzada de 5 folds con cross_val_score. 
+        ◦ Calcule el error cuadrático medio negativo (neg_mean_squared_error). 
+    • Convierta los resultados a RMSE positivos. 
+    • Identifique el mejor alpha (el que tenga menor RMSE promedio). 
+
+Debe devolver tres salidas:
+    • resultados: un diccionario donde las claves son los valores de alpha y los valores son los RMSE promedio 
+    • mejor_alpha: el valor de alpha con menor error 
+    • mejor_rmse: el RMSE correspondiente al mejor modelo 
+
+La función debe:
+    • Llamarse evaluar_regularizacion_ridge 
+    • Recibir los argumentos df, target_col, alphas 
+    • Devolver resultados, mejor_alpha, mejor_rmse

@@ -1,0 +1,20 @@
+Recibes un DataFrame de pandas que contiene múltiples variables numéricas altamente correlacionadas. Este tipo de multicolinealidad puede afectar negativamente a muchos modelos de machine learning.
+Tu objetivo es identificar y eliminar automáticamente las variables redundantes basándote en la correlación entre ellas.
+
+Tu Misión:
+Escribe una función llamada eliminar_multicolinealidad(df, threshold) que realice lo siguiente:
+    • Seleccione únicamente las columnas numéricas del DataFrame. 
+    • Calcule la matriz de correlación absoluta entre variables usando pandas. 
+    • Identifique pares de variables cuya correlación sea mayor que threshold. 
+    • Elimine una de las dos variables de cada par altamente correlacionado (puedes decidir eliminar la segunda variable del par). 
+    • Devuelva: 
+        ◦ Un nuevo DataFrame sin las variables eliminadas. 
+        ◦ Una lista con los nombres de las variables eliminadas. 
+
+La función debe:
+    • Llamarse eliminar_multicolinealidad 
+    • Recibir los argumentos df, threshold 
+    • Devolver df_filtrado, columnas_eliminadas 
+
+Librerías permitidas:
+pandas, numpy

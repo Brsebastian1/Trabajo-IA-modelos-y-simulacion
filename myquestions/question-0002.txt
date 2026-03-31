@@ -1,0 +1,16 @@
+Tienes un DataFrame con variables categóricas que describen perfiles de clientes, como ciudad, tipo de plan, canal de compra y segmento. Quieres convertir esas categorías en variables numéricas y reducir la dimensionalidad del resultado para usarlo después en un modelo o en visualización.
+Tu Misión:
+Escribe una función llamada reducir_perfiles_categoricos(df, cat_cols, n_components) que realice lo siguiente:
+    • Reciba un DataFrame y una lista cat_cols con los nombres de las columnas categóricas que deben procesarse. 
+    • Aplique pd.get_dummies sobre esas columnas para obtener una matriz one-hot. 
+    • Use TruncatedSVD de sklearn.decomposition con n_components=n_components y random_state=42. 
+    • Transforme la matriz codificada a una matriz reducida de menor dimensión. 
+    • Calcule la varianza explicada acumulada usando numpy. 
+Debe devolver dos salidas:
+    • X_reducida: un np.ndarray con la representación reducida 
+    • varianza_acumulada: un float con la suma de explained_variance_ratio_ 
+La función debe:
+    • Llamarse reducir_perfiles_categoricos 
+    • Recibir los argumentos df, cat_cols, n_components 
+    • Devolver X_reducida, varianza_acumulada 
+Librerías permitidas: pandas, numpy, sklearn

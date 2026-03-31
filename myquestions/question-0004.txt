@@ -1,0 +1,18 @@
+Tienes un DataFrame con datos no negativos que representan consumos de energía por franja horaria para distintos usuarios. Quieres descubrir patrones latentes de consumo sin usar etiquetas, descomponiendo la matriz original en componentes interpretables.
+Tu Misión:
+Escribe una función llamada extraer_patrones_consumo(df, n_components) que realice lo siguiente:
+    • Reciba un DataFrame con valores numéricos no negativos. 
+    • Convierta el DataFrame a una matriz de numpy. 
+    • Aplique NMF de sklearn.decomposition con n_components=n_components, init="random", random_state=42 y max_iter=500. 
+    • Obtenga las matrices W y H de la descomposición. 
+    • Reconstruya la matriz aproximada usando multiplicación matricial con numpy. 
+    • Calcule el error cuadrático medio de reconstrucción (RMSE) entre la matriz original y la reconstruida. 
+Debe devolver tres salidas:
+    • W: np.ndarray de forma (n_muestras, n_components) 
+    • H: np.ndarray de forma (n_components, n_features) 
+    • rmse: float con el error de reconstrucción 
+La función debe:
+    • Llamarse extraer_patrones_consumo 
+    • Recibir los argumentos df, n_components 
+    • Devolver W, H, rmse 
+Librerías permitidas: pandas, numpy, sklearn
