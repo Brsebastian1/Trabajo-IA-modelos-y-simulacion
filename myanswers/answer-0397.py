@@ -1,35 +1,15 @@
-import pandas as pd
+from sklearn.ensemble import IsolationForest
 
-def calcular_metricas_clientes(df, contaminacion):
-    metricas_cliente = df.groupby("cliente_id").agg(
-        total_gastado_cliente=("monto", "sum"),
-        promedio_gasto_cliente=("monto", "mean"),
-        num_transacciones_cliente=("monto", "count")
-    ).reset_index()
+def detectar_anomalias_murcielagos(df, contaminacion):
 
-    # Métricas por cliente y categoría
-    metricas_categoria = df.groupby(["cliente_id", "categoria"]).agg(
-        total_categoria=("monto", "sum")
-    ).reset_index()
-
-    # Merge
-    resultado = metricas_categoria.merge(
-        metricas_cliente,
-        on="cliente_id",
-        how="left"
-    )
-
-    # Calcular porcentaje
-    resultado["porcentaje_categoria"] = (
-        resultado["total_categoria"] /
-        resultado["total_gastado_cliente"]
-    )
-
-    # Ordenar
-    resultado = resultado.sort_values(
-        by=["cliente_id", "categoria"]
-    ).reset_index(drop=True)
-
-    output_data = resultado
-
+    input_data = {'df': df.copy(), 'contaminacion': contaminacion}
+    
+    df_clean = df.copy()
+    df_clean['frecuencia_pico'] = df_clean['frecuencia_pico'].rolling(window=3).mean()
+    df_clean = df_clean.dropna()
+    X = df_clean[['frecuencia_pico', 'duracion_pulso']].values
+    iso = IsolationForest(contamination=contaminacion, random_state=42)
+    preds = iso.fit_predict(X)
+    
+    output_data = preds
     return output_data
