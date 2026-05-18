@@ -1,6 +1,6 @@
 import pandas as pd
 
-def calcular_metricas_clientes(df):
+def calcular_metricas_clientes(df, contaminacion):
     metricas_cliente = df.groupby("cliente_id").agg(
         total_gastado_cliente=("monto", "sum"),
         promedio_gasto_cliente=("monto", "mean"),
