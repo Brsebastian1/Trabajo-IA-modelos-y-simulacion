@@ -82,13 +82,3 @@ def generar_caso_de_uso_evaluar_regularizacion_ridge():
     output_data = evaluar_regularizacion_ridge(df, "target", alphas)
 
     return input_data, output_data
-
-
-if __name__ == "__main__":
-    input_data, output_data = generar_caso_de_uso_evaluar_regularizacion_ridge()
-
-    print("INPUT:")
-    print(input_data)
-
-    print("\nOUTPUT:")
-    print(output_data)
