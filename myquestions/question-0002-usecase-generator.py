@@ -67,13 +67,3 @@ def generar_caso_de_uso_reducir_perfiles_categoricos():
     output_data = reducir_perfiles_categoricos(df, cat_cols, n_components)
 
     return input_data, output_data
-
-
-if __name__ == "__main__":
-    input_data, output_data = generar_caso_de_uso_reducir_perfiles_categoricos()
-
-    print("INPUT:")
-    print(input_data)
-
-    print("\nOUTPUT:")
-    print(output_data)
