@@ -7,40 +7,6 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
 
-def evaluar_regularizacion_ridge(df, target_col, alphas):
-    # Separar X e y
-    X = df.drop(columns=[target_col])
-    y = df[target_col]
-
-    # Seleccionar solo columnas numéricas
-    X = X.select_dtypes(include=[np.number])
-
-    resultados = {}
-
-    for alpha in alphas:
-        modelo = Pipeline([
-            ("imputer", SimpleImputer(strategy="mean")),
-            ("scaler", StandardScaler()),
-            ("ridge", Ridge(alpha=alpha))
-        ])
-
-        scores = cross_val_score(
-            modelo,
-            X,
-            y,
-            cv=5,
-            scoring="neg_mean_squared_error"
-        )
-
-        rmse_promedio = float(np.mean(np.sqrt(-scores)))
-        resultados[alpha] = rmse_promedio
-
-    mejor_alpha = min(resultados, key=resultados.get)
-    mejor_rmse = resultados[mejor_alpha]
-
-    return resultados, mejor_alpha, mejor_rmse
-
-
 def generar_caso_de_uso_evaluar_regularizacion_ridge():
     rng = np.random.default_rng()
 
@@ -82,3 +48,46 @@ def generar_caso_de_uso_evaluar_regularizacion_ridge():
     output_data = evaluar_regularizacion_ridge(df, "target", alphas)
 
     return input_data, output_data
+
+def evaluar_regularizacion_ridge(df, target_col, alphas):
+    # Separar X e y
+    X = df.drop(columns=[target_col])
+    y = df[target_col]
+
+    # Seleccionar solo columnas numéricas
+    X = X.select_dtypes(include=[np.number])
+
+    resultados = {}
+
+    for alpha in alphas:
+        modelo = Pipeline([
+            ("imputer", SimpleImputer(strategy="mean")),
+            ("scaler", StandardScaler()),
+            ("ridge", Ridge(alpha=alpha))
+        ])
+
+        scores = cross_val_score(
+            modelo,
+            X,
+            y,
+            cv=5,
+            scoring="neg_mean_squared_error"
+        )
+
+        rmse_promedio = float(np.mean(np.sqrt(-scores)))
+        resultados[alpha] = rmse_promedio
+
+    mejor_alpha = min(resultados, key=resultados.get)
+    mejor_rmse = resultados[mejor_alpha]
+
+    return resultados, mejor_alpha, mejor_rmse
+
+if __name__ == "__main__":
+    input_data, output_data = generar_caso_de_uso_evaluar_regularizacion_ridge()
+
+    print("INPUT:")
+    print(input_data)
+
+    print("\nOUTPUT:")
+    print(output_data)
+
