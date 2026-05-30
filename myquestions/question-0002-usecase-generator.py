@@ -3,19 +3,6 @@ import pandas as pd
 from sklearn.decomposition import TruncatedSVD
 
 
-def reducir_perfiles_categoricos(df, cat_cols, n_components):
-    # Codificación one-hot de las columnas categóricas indicadas
-    X_encoded = pd.get_dummies(df[cat_cols], columns=cat_cols)
-
-    # Reducción de dimensionalidad con TruncatedSVD
-    svd = TruncatedSVD(n_components=n_components, random_state=42)
-    X_reducida = svd.fit_transform(X_encoded)
-
-    # Varianza explicada acumulada
-    varianza_acumulada = float(np.sum(svd.explained_variance_ratio_))
-
-    return X_reducida, varianza_acumulada
-
 
 def generar_caso_de_uso_reducir_perfiles_categoricos():
     rng = np.random.default_rng()
@@ -67,3 +54,18 @@ def generar_caso_de_uso_reducir_perfiles_categoricos():
     output_data = reducir_perfiles_categoricos(df, cat_cols, n_components)
 
     return input_data, output_data
+
+
+def reducir_perfiles_categoricos(df, cat_cols, n_components):
+    # Codificación one-hot de las columnas categóricas indicadas
+    X_encoded = pd.get_dummies(df[cat_cols], columns=cat_cols)
+
+    # Reducción de dimensionalidad con TruncatedSVD
+    svd = TruncatedSVD(n_components=n_components, random_state=42)
+    X_reducida = svd.fit_transform(X_encoded)
+
+    # Varianza explicada acumulada
+    varianza_acumulada = float(np.sum(svd.explained_variance_ratio_))
+
+    return X_reducida, varianza_acumulada
+
